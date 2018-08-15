@@ -3,4 +3,5 @@
 *.png
 *.gif
 *.jpeg
-
+face_detection/dataset
+face_emotion/dataset
