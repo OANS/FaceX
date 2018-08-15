@@ -5,3 +5,4 @@
 *.jpeg
 face_detection/dataset
 face_emotion/dataset
+.DS_Store
