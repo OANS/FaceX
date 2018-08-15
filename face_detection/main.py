@@ -7,7 +7,7 @@ import skimage.io as io
 
 from glob import glob
 from random import shuffle
-from shutil import t
+from shutil import copyfile
 
 
 def parse_fddb_folds(path_dir_data="dataset/FDDB/data",
@@ -68,20 +68,25 @@ def main():
         for image_path in image_paths:
             #copy the image
             print(dict_pictures[image_path][0])
-            copyfile(
-                dict_pictures[image_path][0][0]["path"], 
-                "dataset/{}/".format(dir_name) + dict_pictures[image_path][0][0]["path"].split('/')[-1]
-            ) 
-            #save the faces info of the image
-            s = ""
-            for f in dict_pictures[image_path][0]:
-                s += "{} {} {} {} {}".format(
-                    f["major_axis_radius"],
-                    f["minor_axis_radius"],
-                    f["angle"],
-                    f["center_x"],
-                    f["center_y"]
-                ) + '\n'
-            faces_info = open("dataset/{}/".format(dir_name) + dict_pictures[image_path][0][0]["path"].split('/')[-1] + '.txt', 'w')
-            faces_info.write(s)
-            faces_info.close()
+            for i in range(len(dict_pictures[image_path][0])):
+                copyfile(
+                    dict_pictures[image_path][0][i]["path"], 
+                    "dataset/{}/".format(dir_name) + dict_pictures[image_path][0][i]["path"].split('/')[-1]
+                ) 
+                #save the faces info of the image
+                s = ""
+                for f in dict_pictures[image_path][0]:
+                    s += "{} {} {} {} {}".format(
+                        f["major_axis_radius"],
+                        f["minor_axis_radius"],
+                        f["angle"],
+                        f["center_x"],
+                        f["center_y"]
+                    ) + '\n'
+                faces_info = open("dataset/{}/".format(dir_name) + dict_pictures[image_path][0][i]["path"].split('/')[-1] + '.txt', 'w')
+                faces_info.write(s)
+                faces_info.close()
+
+
+if __name__ == '__main__':
+    main()
