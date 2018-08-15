@@ -12,4 +12,7 @@
  - sklearn
  - pytorch
  - skvideo
+ 
+ ## Useful links
+ - https://vectr.com
   
